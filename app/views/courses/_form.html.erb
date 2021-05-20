@@ -1,0 +1,41 @@
+<%= form_with(model: course) do |form| %>
+  <% if course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-floating mb-3">
+    <%= form.text_field :course_name, class:"form-control", id:"floatingName", placeholder:"Course Name" %>
+    <%= form.label :course_name, for:"floatingName" %>
+  </div>
+
+  <div class="field form-floating mb-3">
+    <%= form.text_field :course_description, class:"form-control", id:"floatingDescription", placeholder:"Description" %>
+    <%= form.label :course_description, for:"floatingDescription" %>
+  </div>
+
+  <div class="field form-floating mb-3">
+    <%= form.text_field :difficulty, class:"form-control", id:"floatingDifficulty", placeholder:"Difficulty" %>
+    <%= form.label :difficulty, for:"floatingDifficulty" %>
+  </div>
+
+  <div class="field form-floating mb-3">
+    <%= form.text_field :time_required, class:"form-control", id:"floatingTimeRequired", placeholder:"Time Required" %>
+    <%= form.label :time_required, for:"floatingTimeRequired" %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :user_id, id: :course_user_id, value:current_user.id, type: :hidden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-dark" %>
+  </div>
+<% end %>

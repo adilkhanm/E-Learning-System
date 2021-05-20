@@ -1,0 +1,33 @@
+<h1>Courses</h1>
+
+<% if !current_user.nil? %>
+  <% if Person.find_by(user_id: current_user.id).nil? %>
+    <% Person.create(user_id: current_user.id) %>
+  <% end %>
+<% end %>
+
+<table class="table table-striped table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Course name</th>
+      <th>Description</th>
+      <th>Difficulty</th>
+      <th>Time required</th>
+      <th>Developed by</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.course_name %></td>
+        <td><%= course.course_description %></td>
+        <td><%= course.difficulty %></td>
+        <td><%= course.time_required %></td>
+        <td><%= User.find(course.user_id).email %></td>
+        <td><%= link_to 'Show', course, class:"btn btn-outline-secondary btn-sm" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

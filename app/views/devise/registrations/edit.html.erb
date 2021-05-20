@@ -1,0 +1,45 @@
+<h2>Edit Profile <% resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field form-floating mb-3">
+    <%= f.email_field :email, class:"form-control", id:"floatingEmail", placeholder:"Email", autofocus: true, autocomplete: "email" %>
+    <%= f.label :email, for:"floatingEmail" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field form-floating mb-3">
+    <%= f.password_field :password, class:"form-control", id:"floatingPassword", placeholder:"Password", autocomplete: "new-password" %>
+    <%= f.label :password, for:"floatingPassword" %> <i>(leave blank if you don't want to change it)</i>
+    
+  </div>
+
+  <div class="field form-floating mb-3">
+    <%= f.password_field :password_confirmation, class:"form-control", id:"floatingPasswordConfirmation", placeholder:"Password Confirmation", autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, for:"floatingPasswordConfirmation" %>
+  </div>
+
+  <div class="field form-floating mb-3">
+    <%= f.password_field :current_password, class:"form-control", id:"floatingCurrentPassword", placeholder:"Current Password", autocomplete: "current-password" %>
+    <%= f.label :current_password, for:"floatingCurrentPassword" %> <i>(we need your current password to confirm your changes)</i>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", class:"btn btn-dark" %>
+  </div>
+<% end %>
+
+<br><br>
+
+<div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+  <div class="card-header">Delete Account</div>
+  <div class="card-body">
+    <p class="card-text">Unhappy or you want to leave?</p>
+    <%= button_to "Cancel my account", registration_path(resource_name),  data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
+  </div>
+</div>
+

@@ -1,0 +1,27 @@
+<div class="p-3 mb-2 bg-light text-dark">
+  <h1 class="display-4"><%= @course.course_name %></h1>
+  <p class="lead">
+  	<strong>Difficulty:</strong> <%= @course.difficulty %>;<br>
+  	<strong>Time required:</strong> <%= @course.time_required %>;<br>
+  	<strong>Description:</strong> <%= @course.course_description %> </p>
+  <hr class="my-4">
+  <p>
+  	<!-- FULL COURSE DESCRIPTION -->
+  </p>
+
+  <br>
+  <% if @course.user == current_user %>
+    <%= link_to 'Edit', edit_course_path(@course), class:"btn btn-dark" %>
+  <% else %>
+    <% if !current_user.nil? %>
+      <% if Record.find_by(user_id: @person.id, course_id: @course.id).nil? %>
+        <%= link_to 'Enroll', enroll_courses_path(courseid: @course.id), class:"btn btn-success" %>
+      <% else %>
+        <%= link_to 'Unenroll', unenroll_courses_path(courseid: @course.id), class:"btn btn-warning" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+</div>
+
